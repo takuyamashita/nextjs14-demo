@@ -65,7 +65,7 @@ type Post struct {
 	ID        string     `json:"id"`
 	Title     string     `json:"title"`
 	Content   string     `json:"content"`
-	CreatedAt CustomTime `json:"created_at"`
+	CreatedAt CustomTime `json:"createdAt"`
 }
 
 func posts() []Post {
