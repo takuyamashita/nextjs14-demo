@@ -7,7 +7,7 @@ services:
       - 3000:3000
     tty: true
     volumes:
-      - ./demo:/app/demo
+      - ./front/demo:/app/demo
     working_dir: /app/demo
     environment:
       - NODE_ENV=development
