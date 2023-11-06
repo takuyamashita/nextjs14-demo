@@ -7,8 +7,18 @@ services:
       - 3000:3000
     tty: true
     volumes:
-      - ./front/demo:/app/demo
+      - ./frontend/demo:/app/demo
     working_dir: /app/demo
     environment:
       - NODE_ENV=development
     user: node
+  golang:
+    image: golang:1.21.3-alpine3.18
+    ports:
+      - 8080:8080
+    tty: true
+    volumes:
+      - ./backend/demo:/app/demo
+    working_dir: /app/demo
+    environment:
+      - GO111MODULE=on
