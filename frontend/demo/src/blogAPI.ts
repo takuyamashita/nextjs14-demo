@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { Article } from './types'
 
 export const getAllPosts = async (throwError: boolean = false): Promise<Article[]> => {
@@ -14,5 +15,26 @@ export const getAllPosts = async (throwError: boolean = false): Promise<Article[
   const article = await response.json()
 
   await new Promise((resolve) => setTimeout(resolve, 2000))
+  return article
+}
+
+export const getDetailArticle = async (
+  id: string,
+  throwError: boolean = false,
+): Promise<Article> => {
+  const response = await fetch(`${process.env.API_ENDPOINT}/api/v1/posts/${id}`, {
+    next: { revalidate: 5 },
+  })
+
+  if(response.status === 404) {
+    notFound()
+  }
+
+  if (throwError || !response.ok) {
+    throw new Error('Failed to fetch posts')
+  }
+
+  const article = await response.json()
+
   return article
 }

@@ -16,7 +16,7 @@ const ArticleList = ({ posts }: Props) => {
           key={post.id}
         >
           <Link
-            href={`/posts/${post.id}`}
+            href={`/articles/${post.id}`}
             className="hover:opacity-75"
           >
             <Image

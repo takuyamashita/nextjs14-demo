@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 )
@@ -32,7 +33,32 @@ func NewRouter() http.Handler {
 
 	r := http.NewServeMux()
 
-	r.HandleFunc("/api/v1/posts", func(w http.ResponseWriter, _ *http.Request) {
+	articlePath := "/api/v1/posts/"
+
+	r.HandleFunc(articlePath, func(w http.ResponseWriter, r *http.Request) {
+
+		id := ""
+		if strings.HasPrefix(r.URL.Path, articlePath) {
+			id = r.URL.Path[len(articlePath):]
+		}
+
+		if id != "" {
+
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+
+			for _, post := range posts() {
+				if post.ID == id {
+					time.Sleep(5 * time.Second)
+					w.WriteHeader(http.StatusOK)
+					_ = json.NewEncoder(w).Encode(post)
+					return
+				}
+			}
+
+			w.WriteHeader(http.StatusNotFound)
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "not found"})
+		}
+
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(http.StatusOK)
 		_ = json.NewEncoder(w).Encode(posts())
