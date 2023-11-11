@@ -61,16 +61,16 @@ func (ct *CustomTime) MarshalJSON() ([]byte, error) {
 	return []byte(ct.Format(`"2006-01-02"`)), nil
 }
 
-type Post struct {
+type Article struct {
 	ID        string     `json:"id"`
 	Title     string     `json:"title"`
 	Content   string     `json:"content"`
 	CreatedAt CustomTime `json:"createdAt"`
 }
 
-func posts() []Post {
+func posts() []Article {
 
-	return []Post{
+	return []Article{
 		{
 			ID:        "post-1",
 			Title:     "Post 1",

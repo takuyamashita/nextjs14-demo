@@ -1,10 +1,10 @@
-import { Post } from '@/types'
+import { Article } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 type Props = {
-  posts: Post[]
+  posts: Article[]
 }
 
 const ArticleList = ({ posts }: Props) => {

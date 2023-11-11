@@ -1,6 +1,6 @@
-import { Post } from './types'
+import { Article } from './types'
 
-export const getAllPosts = async (throwError: boolean = false): Promise<Post[]> => {
+export const getAllPosts = async (throwError: boolean = false): Promise<Article[]> => {
   // see https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating
 
   //const response = await fetch("http://golang:8080/api/v1/posts", {cache: "force-cache"}); // ssg(default)
@@ -11,8 +11,8 @@ export const getAllPosts = async (throwError: boolean = false): Promise<Post[]> 
     throw new Error('Failed to fetch posts')
   }
 
-  const posts = await response.json()
+  const article = await response.json()
 
   await new Promise((resolve) => setTimeout(resolve, 2000))
-  return posts
+  return article
 }
