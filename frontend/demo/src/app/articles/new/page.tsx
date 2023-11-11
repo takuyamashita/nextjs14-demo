@@ -1,6 +1,9 @@
 import React from 'react'
+import { getAllPosts } from '@/blogAPI'
 
-const CreateBlogPage = () => {
+const CreateBlogPage = async () => {
+  const posts = await getAllPosts()
+
   return (
     <div className="min-h-screen py-8 px-4 md:px-12">
       <h2>新規作成</h2>
